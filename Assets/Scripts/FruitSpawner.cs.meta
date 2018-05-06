@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 5823d8bde0285ae4cbd0c7e1fc87a2f7
+timeCreated: 1525590975
+licenseType: Free
+MonoImporter:
+  serializedVersion: 2
+  defaultReferences:
+  - fruitPrefab: {fileID: 1099100089967080, guid: a8068b6a8843f0e459ef2578daad9921,
+      type: 2}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
