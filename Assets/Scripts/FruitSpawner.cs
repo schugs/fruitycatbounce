@@ -33,5 +33,7 @@ public class FruitSpawner : MonoBehaviour {
 
         float xPos = Random.Range(-FRUIT_SPAWN_RANGE, FRUIT_SPAWN_RANGE);
         fruit.transform.position = new Vector3(xPos, FRUIT_SPAWN_HEIGHT, 0f);
+
+        
     }
 }

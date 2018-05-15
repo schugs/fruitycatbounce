@@ -6,16 +6,33 @@ public class PlayerController : MonoBehaviour {
 
     const float PLAYER_SPEED_MULTIPLIER = 10f;
 
+    private Rigidbody rigidBody;
+
 	// Use this for initialization
 	void Start () {
-		
-	}
+		rigidBody = gameObject.GetComponent<Rigidbody>();
+    }
 	
 	// Update is called once per frame
 	void Update () {
         float xMovement = Input.GetAxis("Horizontal");
 
-        this.gameObject.transform.position += new Vector3(xMovement, 0f, 0f)
-            * PLAYER_SPEED_MULTIPLIER * Time.deltaTime;
+        Vector3 movement = new Vector3(xMovement, 0f, 0f) * PLAYER_SPEED_MULTIPLIER * Time.deltaTime;
+
+        Vector3 newPos = this.transform.position + movement;
+
+        rigidBody.MovePosition(newPos);
 	}
+
+    void OnCollisionEnter(Collision collision) {
+        GameObject obj = collision.gameObject;
+        Fruit fruit = obj.GetComponent<Fruit>();
+
+        if (fruit && !fruit.isStuck()){
+            fruit.transform.parent = this.transform;
+            fruit.GetComponent<Rigidbody>().isKinematic = false;
+
+            fruit.stick();
+        }
+    }
 }
