@@ -16,13 +16,38 @@ public class Fruit : MonoBehaviour {
 		
 	}
 
-    public bool isStuck()
+    public bool IsStuck()
     {
         return stuck;
     }
 
-    public void stick()
+    public void Stick(GameObject other)
     {
+        this.transform.parent = other.transform;
+        this.GetComponent<Rigidbody>().isKinematic = true;
+        this.gameObject.layer = other.layer;
         stuck = true;
+    }
+
+    void OnCollisionEnter(Collision collision)
+    {
+        if (this.IsStuck()){
+            return;
+        }
+
+        GameObject obj = collision.gameObject;
+
+        PlayerController player = obj.GetComponent<PlayerController>();
+        if (player && !this.IsStuck()){
+            this.Stick(collision.gameObject);
+            return;
+        }
+
+        Fruit otherFruit = obj.GetComponent<Fruit>();
+        if (otherFruit && otherFruit.IsStuck() && !this.IsStuck())
+        {
+            this.Stick(otherFruit.gameObject);
+            return;
+        }
     }
 }

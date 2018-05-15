@@ -23,16 +23,4 @@ public class PlayerController : MonoBehaviour {
 
         rigidBody.MovePosition(newPos);
 	}
-
-    void OnCollisionEnter(Collision collision) {
-        GameObject obj = collision.gameObject;
-        Fruit fruit = obj.GetComponent<Fruit>();
-
-        if (fruit && !fruit.isStuck()){
-            fruit.transform.parent = this.transform;
-            fruit.GetComponent<Rigidbody>().isKinematic = false;
-
-            fruit.stick();
-        }
-    }
 }
