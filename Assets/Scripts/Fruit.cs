@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class Fruit : MonoBehaviour {
 
+    const float FRUIT_RADIUS = 1f;
+
     private bool stuck = false;
 
 	// Use this for initialization
@@ -23,6 +25,10 @@ public class Fruit : MonoBehaviour {
 
     public void Stick(GameObject other)
     {
+        Vector3 objectToSelf = (this.transform.position - other.transform.position).normalized;
+
+        this.transform.position = other.transform.position + objectToSelf * FRUIT_RADIUS;
+
         this.transform.parent = other.transform;
         this.GetComponent<Rigidbody>().isKinematic = true;
         this.gameObject.layer = other.layer;
