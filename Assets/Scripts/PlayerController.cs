@@ -22,5 +22,7 @@ public class PlayerController : MonoBehaviour {
         Vector3 newPos = this.transform.position + movement;
 
         rigidBody.MovePosition(newPos);
+
+        Debug.DrawLine(transform.position, transform.position + Vector3.up * GameController.MAX_FRUIT_STACK_HEIGHT);
 	}
 }
